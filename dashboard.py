@@ -1,3 +1,4 @@
+# Autoria: Douglas Honório · Projeto Dh73 CyberGuard SOC · 2026
 import os
 import base64
 from pathlib import Path

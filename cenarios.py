@@ -1,4 +1,5 @@
-﻿"""Cenários educativos: geram registros fictícios, sem executar ações reais."""
+# Autoria: Douglas Honório · Projeto Dh73 CyberGuard SOC · 2026
+"""Cenários educativos: geram registros fictícios, sem executar ações reais."""
 from datetime import datetime, timedelta, timezone
 
 CENARIOS = {

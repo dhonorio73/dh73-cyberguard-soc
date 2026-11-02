@@ -1,4 +1,5 @@
-﻿"""Relatório HTML e leitura segura de exemplos CSV."""
+# Autoria: Douglas Honório · Projeto Dh73 CyberGuard SOC · 2026
+"""Relatório HTML e leitura segura de exemplos CSV."""
 import csv
 import html
 import io

@@ -1,4 +1,5 @@
-﻿"""Gera o cenário completo na API do laboratório."""
+# Autoria: Douglas Honório · Projeto Dh73 CyberGuard SOC · 2026
+"""Gera o cenário completo na API do laboratório."""
 import os
 
 import requests

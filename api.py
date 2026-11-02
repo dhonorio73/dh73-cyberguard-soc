@@ -1,3 +1,4 @@
+# Autoria: Douglas Honório · Projeto Dh73 CyberGuard SOC · 2026
 import ipaddress
 import os
 import sqlite3

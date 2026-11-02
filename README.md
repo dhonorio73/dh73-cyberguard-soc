@@ -1,4 +1,4 @@
-﻿# Dh73 CyberGuard SOC
+# Dh73 CyberGuard SOC
 
 Laboratório de segurança com eventos fictícios, API REST em Flask, SQLite e painel Streamlit. Criado por Douglas Honório para aprendizado e portfólio.
 
@@ -58,11 +58,20 @@ A API é um laboratório sem autenticação, limitação de requisições ou col
 python -m pytest -q
 ```
 
-## Possíveis próximos passos
+## Evolução para uso comercial
 
-Importação validada de arquivos CSV, controles de acesso, migrações e integração opcional com Supabase. Antes de usar dados reais, avalie segurança, privacidade, autenticação, limites e operação.
+O CyberGuard é atualmente um laboratório local com dados fictícios. Os itens abaixo são objetivos futuros e ainda não são funcionalidades prontas para clientes.
 
-**Criado por Douglas Honório.**
+1. **Acesso seguro:** adicionar autenticação, permissões por função, proteção das credenciais, limitação de requisições e conexões HTTPS.
+2. **Dados e clientes:** avaliar PostgreSQL ou Supabase, migrações, backups com testes de restauração, retenção e isolamento comprovado entre clientes.
+3. **Coleta e análise reais:** integrar fontes autorizadas, validar e normalizar logs, desenvolver novas regras e medir sua precisão e seus falsos positivos. As simulações atuais não comprovam a detecção de malware.
+4. **Privacidade e governança:** definir quais dados serão tratados, sua finalidade e período de retenção; avaliar obrigações aplicáveis, inclusive a LGPD, e responsabilidades contratuais com orientação especializada.
+5. **Operação e segurança:** estabelecer monitoramento da aplicação, trilhas de auditoria, resposta a incidentes, gestão de vulnerabilidades, atualizações e testes de segurança independentes.
+6. **Qualidade e entrega:** ampliar testes de integração, carga e recuperação; automatizar verificações e testar o Docker em ambiente adequado.
+7. **Oferta comercial:** validar o problema com potenciais clientes, definir público, funcionalidades, custos, suporte, termos de uso e modelo de cobrança.
+
+A escolha da hospedagem deve considerar os termos de uso, a proteção dos dados e a continuidade do serviço. No Streamlit Community Cloud, o armazenamento local não garante persistência; não use esta demonstração para dados reais de clientes. Referências: [documentação do Streamlit](https://docs.streamlit.io/develop/concepts/connections/connecting-to-data) e [guia de segurança da ANPD](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-lanca-guia-de-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte).
+
 
 
 ## Relatórios e importação
@@ -70,3 +79,5 @@ Importação validada de arquivos CSV, controles de acesso, migrações e integr
 O painel mostra uma linha do tempo por hora em UTC e permite baixar um relatório HTML dos eventos filtrados. O navegador pode imprimir o relatório em PDF. Os alertas no relatório são gerais e representam a janela de dez minutos no instante da consulta.
 
 Para importar dados fictícios, use a seção de importação no painel e selecione `exemplo_eventos.csv`. O arquivo deve ter UTF-8, cabeçalho `timestamp,ip,tipo,severidade,descricao`, no máximo 1 MB e 1.000 registros. A API valida o lote inteiro antes da gravação. A regra adicional identifica três alterações de arquivo do mesmo IP em dez minutos. Esses sinais são educacionais e não confirmam incidentes reais.
+
+**Criado por Douglas Honório.**
