@@ -32,6 +32,10 @@ streamlit run dashboard.py --server.port 8502
 
 Abra http://localhost:8502. O simulador adiciona novos eventos a cada execução. A regra de alerta considera somente os últimos dez minutos em UTC; o alerta desaparece após esse período. A lista é limitada aos 1.000 eventos mais recentes. O banco fica em `data/eventos.db`.
 
+## Demonstração para portfólio
+
+O arquivo demo_publica.py funciona com dados fictícios isolados em cada sessão, sem iniciar a API nem persistir dados. Para executar: streamlit run demo_publica.py. Ao encerrar a sessão, os dados são perdidos. Esta versão educacional não aceita logs reais de clientes.
+
 ## Docker
 
 Com Docker e Docker Compose instalados:
@@ -70,7 +74,7 @@ O CyberGuard é atualmente um laboratório local com dados fictícios. Os itens 
 6. **Qualidade e entrega:** ampliar testes de integração, carga e recuperação; automatizar verificações e testar o Docker em ambiente adequado.
 7. **Oferta comercial:** validar o problema com potenciais clientes, definir público, funcionalidades, custos, suporte, termos de uso e modelo de cobrança.
 
-A escolha da hospedagem deve considerar os termos de uso, a proteção dos dados e a continuidade do serviço. No Streamlit Community Cloud, o armazenamento local não garante persistência; não use esta demonstração para dados reais de clientes. Referências: [documentação do Streamlit](https://docs.streamlit.io/develop/concepts/connections/connecting-to-data) e [guia de segurança da ANPD](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-lanca-guia-de-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte).
+A escolha da hospedagem deve considerar os termos de uso, a proteção dos dados e a continuidade do serviço. No Streamlit Community Cloud, o armazenamento local não garante persistência; não use esta demonstração para dados reais de clientes. Referências: [documentação do Streamlit](https://docs.streamlit.io/develop/concepts/connections/connecting-to-data) e [guia de segurança da ANPD](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-publica-guia-de-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte).
 
 
 
