@@ -2,10 +2,13 @@
 
 Laboratório de segurança com eventos fictícios, API REST em Flask, SQLite e painel Streamlit. Criado por Douglas Honório para aprendizado e portfólio.
 
+## Experimentar
+
+[Abrir demonstração pública](https://dh73-cyberguard-soc.streamlit.app/) — eventos fictícios isolados na sessão, sem monitoramento real. A versão local inclui API, banco SQLite e importação de CSV.
 ## Funcionalidades
 
 - Registro e consulta de eventos com validação de IP, data, tipo e severidade.
-- Regra demonstrativa: cinco ou mais falhas de login de um IP nos últimos dez minutos.
+- Regras demonstrativas: cinco falhas de login ou três alterações de arquivo do mesmo IP em dez minutos.
 - Painel com indicadores, filtros e gráfico de severidade.
 - Simulador de eventos e testes automatizados.
 - Persistência local em SQLite e execução opcional com Docker.
