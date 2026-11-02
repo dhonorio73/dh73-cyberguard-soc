@@ -36,6 +36,33 @@ if "eventos" not in st.session_state:
 st.sidebar.subheader("🧪 Simulações")
 cenario = st.sidebar.selectbox("Escolha um cenário", list(CENARIOS))
 st.sidebar.caption(CENARIOS[cenario])
+explicacoes = {
+    "Falhas de autenticação": (
+        "Cinco falhas fictícias do mesmo IP são inseridas em cinco minutos.",
+        "A regra gera alerta a partir de cinco falhas em dez minutos.",
+        "Um analista verificaria origem, horários e se o usuário reconhece as tentativas.",
+    ),
+    "Acesso autorizado": (
+        "É inserido um evento fictício de autenticação bem-sucedida.",
+        "Este evento isolado não aciona as regras de falhas ou alterações.",
+        "Um analista poderia verificar se o acesso e o horário são esperados.",
+    ),
+    "Alteração de arquivo": (
+        "É inserido um registro fictício de alteração; nenhum arquivo real é modificado.",
+        "A regra gera alerta quando há três alterações do mesmo IP em dez minutos.",
+        "Um analista verificaria quais arquivos mudaram e se havia autorização.",
+    ),
+    "Conexão suspeita": (
+        "É inserido um registro fictício de conexão; nenhuma conexão é realizada.",
+        "A classificação é apenas ilustrativa e não ativa uma regra automática nesta versão.",
+        "Um analista investigaria origem, destino e contexto em fontes autorizadas.",
+    ),
+    "Cenário completo": (
+        "O lote reúne falhas, login bem-sucedido, alteração de arquivo e conexão fictícia.",
+        "As cinco falhas do mesmo IP acionam a regra de autenticação.",
+        "Um analista correlacionaria horários e contexto antes de concluir se há incidente.",
+    ),
+}
 if st.sidebar.button("Executar simulação", type="primary"):
     if len(st.session_state.eventos) + len(gerar_cenario(cenario)) > 1000:
         st.sidebar.warning("Limite de 1.000 eventos nesta sessão. Reinicie a demonstração.")
@@ -64,6 +91,13 @@ a.metric("Eventos filtrados", len(filtrado))
 b.metric("Falhas filtradas", int((filtrado["tipo"] == "login_falho").sum()))
 c.metric("Alertas por regra · 10 min", len(alertas))
 st.caption("Alertas usam todos os eventos da sessão e não seguem o filtro selecionado.")
+with st.expander("Entenda o cenário selecionado", expanded=True):
+    aconteceu, regra_cenario, investigacao = explicacoes[cenario]
+    st.markdown(f"**O que acontece:** {aconteceu}")
+    st.markdown(f"**Regra de alerta:** {regra_cenario}")
+    st.markdown(f"**Possível investigação:** {investigacao}")
+    st.caption("Os alertas abaixo consideram todos os eventos da sessão, inclusive de cenários anteriores.")
+
 st.subheader("Alertas de laboratório")
 if alertas:
     st.dataframe(pd.DataFrame(alertas), hide_index=True, use_container_width=True)
@@ -72,10 +106,27 @@ else:
 st.subheader("Eventos ao longo do tempo")
 if not filtrado.empty:
     tempos = pd.to_datetime(filtrado["timestamp"], utc=True)
-    st.bar_chart(tempos.dt.floor("h").value_counts().sort_index().rename("Eventos"), color="#59d8e7")
-    st.caption("Eventos agrupados por hora em UTC.")
+    st.bar_chart(tempos.dt.floor("min").value_counts().sort_index().rename("Eventos"), color="#59d8e7")
+    st.caption("Eventos filtrados agrupados por minuto em UTC; horários pertencem aos dados simulados.")
 st.subheader("Eventos registrados")
-st.dataframe(filtrado, hide_index=True, use_container_width=True)
+cores_eventos = {
+    "login_falho": ("#592828", "Falha de login"),
+    "login_sucesso": ("#164737", "Login bem-sucedido"),
+    "alteracao_arquivo": ("#59431e", "Alteração de arquivo"),
+    "conexao_suspeita": ("#3b305f", "Conexão suspeita"),
+}
+st.caption("🔴 Falha de login · 🟢 Login bem-sucedido · 🟠 Alteração de arquivo · 🟣 Conexão suspeita")
+if not filtrado.empty:
+    exibicao = filtrado.copy()
+    exibicao["tipo"] = exibicao["tipo"].map(lambda valor: cores_eventos.get(valor, ("", valor))[1])
+    cores = pd.DataFrame(
+        [[f"background-color: {cores_eventos.get(linha['tipo'], ('#1d3440', ''))[0]}; color: #ffffff"] * len(filtrado.columns)
+         for _, linha in filtrado.iterrows()],
+        index=filtrado.index, columns=filtrado.columns,
+    )
+    st.dataframe(exibicao.style.apply(lambda _: cores, axis=None), hide_index=True, use_container_width=True)
+else:
+    st.info("Nenhum evento para este filtro.")
 relatorio = criar_relatorio(filtrado.to_dict("records"), alertas, {"tipo": tipo, "severidade": "Todas"})
 st.download_button("Baixar relatório HTML", relatorio, file_name="relatorio-cyberguard.html", mime="text/html")
 st.caption("Regras educativas, sem inteligência artificial ou monitoramento real. Criado por Douglas Honório.")
