@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    command: flask --app api run --host 0.0.0.0 --port 5000
+    environment:
+      CYBERGUARD_DB: /data/eventos.db
+    volumes:
+      - cyberguard_data:/data
+    ports:
+      - "127.0.0.1:5000:5000"
+  painel:
+    build: .
+    command: streamlit run dashboard.py --server.address 0.0.0.0 --server.port 8502 --server.headless true
+    environment:
+      CYBERGUARD_API: http://api:5000
+    depends_on:
+      - api
+    ports:
+      - "127.0.0.1:8502:8502"
+volumes:
+  cyberguard_data:
+

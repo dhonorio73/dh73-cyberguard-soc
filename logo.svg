@@ -1,0 +1,9 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title">
+<title id="title">DH73 CyberGuard</title>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#71e8ff"/><stop offset="1" stop-color="#58eab4"/></linearGradient></defs>
+<path d="M90 8 156 34v48c0 44-25 70-66 90C49 152 24 126 24 82V34Z" fill="#071c2b" stroke="url(#g)" stroke-width="5"/>
+<path d="M90 22 144 43v39c0 35-18 57-54 75-36-18-54-40-54-75V43Z" fill="none" stroke="#287d92" stroke-width="2"/>
+<path d="M49 64h82M49 116h82M50 58l-8-7M130 58l8-7M50 122l-8 7M130 122l8 7" stroke="#4acebd" stroke-width="2" opacity=".7"/>
+<text x="90" y="101" text-anchor="middle" fill="#eaffff" font-family="Arial,sans-serif" font-size="35" font-weight="800" letter-spacing="-2">DH<tspan fill="#62dceb">73</tspan></text>
+<circle cx="42" cy="51" r="3" fill="#61e7ca"/><circle cx="138" cy="51" r="3" fill="#61e7ca"/><circle cx="42" cy="129" r="3" fill="#61e7ca"/><circle cx="138" cy="129" r="3" fill="#61e7ca"/>
+</svg>

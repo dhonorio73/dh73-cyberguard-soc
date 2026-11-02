@@ -1,0 +1,4 @@
+﻿timestamp,ip,tipo,severidade,descricao
+2026-01-10T10:30:00Z,192.0.2.35,login_falho,media,Tentativa de login simulada
+2026-01-10T10:32:00Z,198.51.100.25,alteracao_arquivo,alta,Alteração simulada de arquivo
+
